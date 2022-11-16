@@ -1,5 +1,8 @@
 package com.emagomiladev.app.entities;
 
+import java.io.Serializable;
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,79 +12,104 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "enterprises")
-public class Enterprise {
+public class Enterprise implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idEnterprise;
+	private static final long serialVersionUID = 1L;
 
-    private String name;
-    private String cuit;
-    private String direccion;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long idEnterprise;
 
-    @Column(name = "phone_number")
-    private String phoneNumber;
-    private String email;
+	private String name;
+	private String cuit;
+	private String direccion;
 
-    public Enterprise() {
-        super();
-    }
+	@Column(name = "phone_number")
+	private String phoneNumber;
+	private String email;
+	private String clave;
+	@Column(name = "registration_date")
+	private Date registrationDate;
 
-    public Enterprise(Long idEnterprise, String name, String cuit, String direccion, String phoneNumber, String email) {
-        this.idEnterprise = idEnterprise;
-        this.name = name;
-        this.cuit = cuit;
-        this.direccion = direccion;
-        this.phoneNumber = phoneNumber;
-        this.email = email;
-    }
+	public Enterprise() {
+		super();
+	}
 
-    public Long getIdEnterprise() {
-        return idEnterprise;
-    }
+	public Enterprise(Long idEnterprise, String name, String cuit, String direccion, String phoneNumber, String email,
+			String clave, Date registrationDate) {
+		super();
+		this.idEnterprise = idEnterprise;
+		this.name = name;
+		this.cuit = cuit;
+		this.direccion = direccion;
+		this.phoneNumber = phoneNumber;
+		this.email = email;
+		this.clave = clave;
+		this.registrationDate = registrationDate;
+	}
 
-    public void setIdEnterprise(Long idEnterprise) {
-        this.idEnterprise = idEnterprise;
-    }
+	public Long getIdEnterprise() {
+		return idEnterprise;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public void setIdEnterprise(Long idEnterprise) {
+		this.idEnterprise = idEnterprise;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public String getCuit() {
-        return cuit;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public void setCuit(String cuit) {
-        this.cuit = cuit;
-    }
+	public String getCuit() {
+		return cuit;
+	}
 
-    public String getDireccion() {
-        return direccion;
-    }
+	public void setCuit(String cuit) {
+		this.cuit = cuit;
+	}
 
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
+	public String getDireccion() {
+		return direccion;
+	}
 
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
 
-    public String getEmail() {
-        return email;
-    }
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getClave() {
+		return clave;
+	}
+
+	public void setClave(String clave) {
+		this.clave = clave;
+	}
+
+	public Date getRegistrationDate() {
+		return registrationDate;
+	}
+
+	public void setRegistrationDate(Date registrationDate) {
+		this.registrationDate = registrationDate;
+	}
 
 }
