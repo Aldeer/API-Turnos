@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.emagomiladev.app.dto.OrganizacionDto;
@@ -37,13 +38,20 @@ public class OrganizacionController {
 
 		return new ResponseEntity<>(res, HttpStatus.OK);
 	}
-//	
-//	@GetMapping("/")
-//	public ResponseEntity<Map<String, Object>> busquedaPorNombreYClave(@RequestBody SolicitudOrgDto dto) {
-//		Map<String, Object> res = new HashMap<>();
-//		res.put("Respuesta", orgService.findByNombreAndClave(dto));
-//		return new ResponseEntity<>(res, HttpStatus.OK);
-//	}
+
+	@GetMapping("/todas")
+	public ResponseEntity<Map<String, Object>> traerTodasLasOrganizaciones() {
+		Map<String, Object> res = new HashMap<>();
+		res.put("Organizaciones", orgService.obtenerTodasLasOrganizaciones());
+		return new ResponseEntity<>(res, HttpStatus.OK);
+	}
+
+	@GetMapping("/cuit")
+	public ResponseEntity<Map<String, Object>> traerOrganizacionPorCuit(@RequestParam String cuit) {
+		Map<String, Object> res = new HashMap<>();
+		res.put("Respuesta", orgService.findByCuit(cuit));
+		return new ResponseEntity<>(res, HttpStatus.OK);
+	}
 
 	@PostMapping("/nuevaOrganizacion")
 	public ResponseEntity<Map<String, Object>> crear(@Valid @RequestBody OrganizacionDto dto) {
@@ -54,18 +62,18 @@ public class OrganizacionController {
 	}
 
 	@PutMapping("/modificar")
-	public ResponseEntity<Map<String, Object>> actualizar(@RequestBody SolicitudOrgDto dto) {
+	public ResponseEntity<Map<String, Object>> actualizar(@Valid @RequestBody SolicitudOrgDto dto) {
 		Map<String, Object> res = new HashMap<>();
 		RespuestaOrgDto orgMod = orgService.actualizarOrganizacion(dto);
 		res.put("Empresa modificada", orgMod);
 		return new ResponseEntity<>(res, HttpStatus.OK);
 	}
-	
+
 	@DeleteMapping("/eliminar")
-	public ResponseEntity<Map<String, Object>>	eliminar(@RequestBody SolicitudOrgDto dto) {
+	public ResponseEntity<Map<String, Object>> eliminar(@Valid @RequestBody SolicitudOrgDto dto) {
 		Map<String, Object> res = new HashMap<>();
 		res.put("Mensaje", orgService.eliminarEmpresa(dto));
-		
+
 		return new ResponseEntity<>(res, HttpStatus.OK);
 	}
 

@@ -14,9 +14,8 @@ public class EventoDto implements Serializable {
 	private String nombreEvento;
 	private String ubicacion;
 	private String tipoEvento;
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm")
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date fechaEvento;
-	private boolean activo;
 
 	public EventoDto() {
 		super();
@@ -24,7 +23,7 @@ public class EventoDto implements Serializable {
 	}
 
 	public EventoDto(String nombreEmpresa, String clave, String nombreEvento, String ubicacion, String tipoEvento,
-			Date fechaEvento, boolean activo) {
+			Date fechaEvento) {
 		super();
 		this.nombreEmpresa = nombreEmpresa;
 		this.clave = clave;
@@ -32,7 +31,6 @@ public class EventoDto implements Serializable {
 		this.ubicacion = ubicacion;
 		this.tipoEvento = tipoEvento;
 		this.fechaEvento = fechaEvento;
-		this.activo = activo;
 	}
 
 	public String getNombreEmpresa() {
@@ -83,19 +81,10 @@ public class EventoDto implements Serializable {
 		this.fechaEvento = fechaEvento;
 	}
 
-	public boolean isActivo() {
-		return activo;
-	}
-
-	public void setActivo(boolean activo) {
-		this.activo = activo;
-	}
-
 	@Override
 	public String toString() {
 		return "EventoDto [nombreEmpresa=" + nombreEmpresa + ", clave=" + clave + ", nombreEvento=" + nombreEvento
-				+ ", ubicacion=" + ubicacion + ", tipoEvento=" + tipoEvento + ", fechaEvento=" + fechaEvento
-				+ ", activo=" + activo + "]";
+				+ ", ubicacion=" + ubicacion + ", tipoEvento=" + tipoEvento + ", fechaEvento=" + fechaEvento + "]";
 	}
 
 }

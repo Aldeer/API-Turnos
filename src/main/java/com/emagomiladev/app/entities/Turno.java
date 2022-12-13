@@ -5,9 +5,12 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -20,11 +23,19 @@ public class Turno implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
-	@Column(name = "FECHA")
+	@Column(name = "fecha")
 	private Date fecha;
 
-	@Column(name = "CODIGO")
+	@Column(name = "codigo")
 	private String codigo;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "persona_id")
+	private Persona persona;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "evento_id")
+	private Evento evento;
 
 	public Turno() {
 		super();
@@ -60,6 +71,28 @@ public class Turno implements Serializable {
 
 	public void setCodigo(String codigo) {
 		this.codigo = codigo;
+	}
+
+	public Evento getEvento() {
+		return evento;
+	}
+
+	public void setEvento(Evento evento) {
+		this.evento = evento;
+	}
+
+	public Persona getPersona() {
+		return persona;
+	}
+
+	public void setPersona(Persona persona) {
+		this.persona = persona;
+	}
+
+	@Override
+	public String toString() {
+		return "Turno [id=" + id + ", fecha=" + fecha + ", codigo=" + codigo + ", persona=" + persona + ", evento="
+				+ evento + "]";
 	}
 
 }

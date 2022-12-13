@@ -24,25 +24,25 @@ public class Organizacion implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "NOMBRE")
+	@Column(name = "nombre")
 	private String nombre;
 
-	@Column(name = "CUIT")
+	@Column(name = "cuit")
 	private String cuit;
 
-	@Column(name = "DIRECCION")
+	@Column(name = "direccion")
 	private String direccion;
 
-	@Column(name = "TELEFONO")
+	@Column(name = "telefono")
 	private Long telefono;
 
-	@Column(name = "EMAIL")
+	@Column(name = "email")
 	private String email;
 
-	@Column(name = "FEHCA_DE_ALTA", updatable = false)
+	@Column(name = "fecha_de_alta", updatable = false)
 	private Date fechaAlta;
 
-	@Column(name = "CLAVE")
+	@Column(name = "clave")
 	private String clave;
 
 	@OneToMany(mappedBy = "organizacion", cascade = CascadeType.ALL, orphanRemoval = true)

@@ -3,18 +3,27 @@ package com.emagomiladev.app.dto;
 import java.io.Serializable;
 import java.util.Date;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+public class TurnoDto implements Serializable {
 
-public class RespuestaEventoDto implements  Serializable{
 
 	private static final long serialVersionUID = 1L;
-
 	private String nombreEmpresa;
 	private String nombreEvento;
-	private String ubicacion;
-	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date fechaEvento;
-	private String tipoEvento;
+	private String codigo;
+
+	public TurnoDto() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public TurnoDto(String nombreEmpresa, String nombreEvento, Date fechaEvento, String codigo) {
+		super();
+		this.nombreEmpresa = nombreEmpresa;
+		this.nombreEvento = nombreEvento;
+		this.fechaEvento = fechaEvento;
+		this.codigo = codigo;
+	}
 
 	public String getNombreEmpresa() {
 		return nombreEmpresa;
@@ -32,14 +41,6 @@ public class RespuestaEventoDto implements  Serializable{
 		this.nombreEvento = nombreEvento;
 	}
 
-	public String getUbicacion() {
-		return ubicacion;
-	}
-
-	public void setUbicacion(String ubicacion) {
-		this.ubicacion = ubicacion;
-	}
-
 	public Date getFechaEvento() {
 		return fechaEvento;
 	}
@@ -48,17 +49,18 @@ public class RespuestaEventoDto implements  Serializable{
 		this.fechaEvento = fechaEvento;
 	}
 
-	public String getTipoEvento() {
-		return tipoEvento;
+	public String getCodigo() {
+		return codigo;
 	}
 
-	public void setTipoEvento(String tipoEvento) {
-		this.tipoEvento = tipoEvento;
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
 	}
 
 	@Override
 	public String toString() {
-		return "SolicitudEventoDto [nombreEmpresa=" + nombreEmpresa + ", nombreEvento=" + nombreEvento + ", ubicacion="
-				+ ubicacion + ", fechaEvento=" + fechaEvento + ", tipoEvento=" + tipoEvento + "]";
+		return "TurnoDto [nombreEmpresa=" + nombreEmpresa + ", nombreEvento=" + nombreEvento + ", fechaEvento="
+				+ fechaEvento + ", codigo=" + codigo + "]";
 	}
+
 }

@@ -3,25 +3,38 @@ package com.emagomiladev.app.dto;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class OrganizacionDto implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	@NotEmpty(message = "El campo no puede estar vacio o nulo")
+	@Size(max = 30, message = "supera el maximo de caracteres permitidos(max. 30)")
 	private String nombre;
 
+	@NotEmpty(message = "El campo no puede estar vacio o nulo")
 	private String cuit;
 
+	@NotEmpty(message = "El campo no puede estar vacio o nulo")
+	@Size(max = 50, message = "Supera el maximo de caracteres permitidos (max. 50)")
 	private String direccion;
 
 	private Long telefono;
 
+	@NotEmpty(message = "El campo no puede estar vacio o nulo")
+	@Email(message = "Email no valido")
 	private String email;
 
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm")
 	private Date fechaAlta;
 
+	@NotEmpty(message = "El campo no puede estar vacio o nulo")
+	@Size(min = 8, max = 12, message = "La clave debe contener entre min. 8 y max. 12 cifras")
 	private String clave;
 
 	public OrganizacionDto() {

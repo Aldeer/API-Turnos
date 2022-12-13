@@ -5,31 +5,35 @@ import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-public class RespuestaEventoDto implements  Serializable{
+public class RespuestaListaEventoDto implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private String nombreEmpresa;
-	private String nombreEvento;
+	private String nombre;
 	private String ubicacion;
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date fechaEvento;
 	private String tipoEvento;
 
-	public String getNombreEmpresa() {
-		return nombreEmpresa;
+	public RespuestaListaEventoDto() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
-	public void setNombreEmpresa(String nombreEmpresa) {
-		this.nombreEmpresa = nombreEmpresa;
+	public RespuestaListaEventoDto(String nombre, String ubicacion, Date fechaEvento, String tipoEvento) {
+		super();
+		this.nombre = nombre;
+		this.ubicacion = ubicacion;
+		this.fechaEvento = fechaEvento;
+		this.tipoEvento = tipoEvento;
 	}
 
-	public String getNombreEvento() {
-		return nombreEvento;
+	public String getNombre() {
+		return nombre;
 	}
 
-	public void setNombreEvento(String nombreEvento) {
-		this.nombreEvento = nombreEvento;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 
 	public String getUbicacion() {
@@ -58,7 +62,8 @@ public class RespuestaEventoDto implements  Serializable{
 
 	@Override
 	public String toString() {
-		return "SolicitudEventoDto [nombreEmpresa=" + nombreEmpresa + ", nombreEvento=" + nombreEvento + ", ubicacion="
-				+ ubicacion + ", fechaEvento=" + fechaEvento + ", tipoEvento=" + tipoEvento + "]";
+		return "RespuestaListaEventoDto [nombre=" + nombre + ", ubicacion=" + ubicacion + ", fechaEvento=" + fechaEvento
+				+ ", tipoEvento=" + tipoEvento + "]";
 	}
+
 }

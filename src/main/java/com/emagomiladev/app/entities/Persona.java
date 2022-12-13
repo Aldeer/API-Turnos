@@ -1,63 +1,58 @@
 package com.emagomiladev.app.entities;
 
-import java.util.Date;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "personas")
-public class Persona {
+@Table(name = "personas", uniqueConstraints = @UniqueConstraint(columnNames = {"dni"}))
+public class Persona implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "NOMBRE")
+	@Column(name = "nombre")
 	private String nombre;
 
-	@Column(name = "APELLIDO")
+	
+	@Column(name = "apellido")
 	private String apellido;
 
-	@Column(name = "DNI")
+	@Column(name = "dni")
 	private Long dni;
 
-	@Column(name = "NOMBRE_EMPRESA")
-	private String nombreEmpresa;
-
-	@Column(name = "NOMBRE_EVENTO")
-	private String nombreEvento;
-
-	@Column(name = "FECHA_DEL_EVENTO")
-	private Date fechaEvento;
-
-	@Column(name = "CLAVE")
+	@Column(name = "clave")
 	private String clave;
 
-	@Column(name = "ACTIVO")
-	private boolean activo;
+	@OneToMany(mappedBy = "persona", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Turno> turnos = new ArrayList<>();
 
 	public Persona() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Persona(Long id, String nombre, String apellido, Long dni, String nombreEmpresa, String nombreEvento,
-			Date fechaEvento, String clave, boolean activo) {
+	public Persona(Long id, String nombre, String apellido, Long dni, String clave, List<Turno> turnos) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.dni = dni;
-		this.nombreEmpresa = nombreEmpresa;
-		this.nombreEvento = nombreEvento;
-		this.fechaEvento = fechaEvento;
 		this.clave = clave;
-		this.activo = activo;
+		this.turnos = turnos;
 	}
 
 	public Long getId() {
@@ -92,44 +87,26 @@ public class Persona {
 		this.dni = dni;
 	}
 
-	public String getNombreEmpresa() {
-		return nombreEmpresa;
-	}
-
-	public void setNombreEmpresa(String nombreEmpresa) {
-		this.nombreEmpresa = nombreEmpresa;
-	}
-
-	public String getNombreEvento() {
-		return nombreEvento;
-	}
-
-	public void setNombreEvento(String nombreEvento) {
-		this.nombreEvento = nombreEvento;
-	}
-
-	public Date getFechaEvento() {
-		return fechaEvento;
-	}
-
-	public void setFechaEvento(Date fechaEvento) {
-		this.fechaEvento = fechaEvento;
-	}
-
 	public String getClave() {
-		return clave;
+		return this.clave;
 	}
 
 	public void setClave(String clave) {
 		this.clave = clave;
 	}
 
-	public boolean isActivo() {
-		return activo;
+	public List<Turno> getTurnos() {
+		return turnos;
 	}
 
-	public void setActivo(boolean activo) {
-		this.activo = activo;
+	public void setTurnos(List<Turno> turnos) {
+		this.turnos = turnos;
+	}
+
+	@Override
+	public String toString() {
+		return "Persona [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", dni=" + dni + ", clave="
+				+ clave + ", turnos=" + turnos + "]";
 	}
 
 }
