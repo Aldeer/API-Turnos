@@ -11,6 +11,7 @@ import com.emagomiladev.app.dto.OrganizacionDto;
 import com.emagomiladev.app.dto.RespuestaOrgDto;
 import com.emagomiladev.app.dto.SolicitudOrgDto;
 import com.emagomiladev.app.entities.Organizacion;
+import com.emagomiladev.app.exceptions.ExistingOrganizationException;
 import com.emagomiladev.app.exceptions.ResourceNotFoundException;
 import com.emagomiladev.app.exceptions.WrongPasswordException;
 import com.emagomiladev.app.wrappers.OrganizacionWrapper;
@@ -23,6 +24,10 @@ public class OrganizacionServiceImpl implements IOrganizacionService {
 
 	@Override
 	public RespuestaOrgDto crearNuevaOrganizacion(OrganizacionDto dto) {
+		if (daoOrg.existsByNombre(dto.getNombre()))
+			throw new ExistingOrganizationException(dto.getNombre(), "Nombre");
+		if (daoOrg.existsByCuit(dto.getCuit()))
+			throw new ExistingOrganizationException(dto.getCuit(), "Cuit");
 		Organizacion entidad = OrganizacionWrapper.mapearEntidad(dto);
 		Organizacion guardarEntidad = daoOrg.save(entidad);
 		return OrganizacionWrapper.mapearRespuestaDto(guardarEntidad);
@@ -86,7 +91,5 @@ public class OrganizacionServiceImpl implements IOrganizacionService {
 				.orElseThrow(() -> new ResourceNotFoundException("ORGANIZACION", "CUIT", cuit));
 		return OrganizacionWrapper.mapearRespuestaDto(org);
 	}
-	
-	
 
 }

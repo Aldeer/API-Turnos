@@ -20,4 +20,9 @@ public interface OrganizacionDao extends JpaRepository<Organizacion, Long> {
 	@Transactional(readOnly = true)
 	public Optional<Organizacion> findByCuit(String cuit);
 	
+	@Transactional(readOnly = true)
+	public boolean existsByNombre(String nombre);
+	
+	@Transactional(readOnly = true)
+	public boolean existsByCuit(String cuit);
 }
